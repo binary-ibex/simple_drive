@@ -3,6 +3,7 @@ import 'package:appwrite/models.dart' as models;
 import 'package:get/get.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:simple_drive/config.dart';
 import 'package:simple_drive/home.dart';
 import 'package:simple_drive/dialog_helper.dart';
 import 'package:file_picker/file_picker.dart';
@@ -15,6 +16,7 @@ class AppController extends GetxController {
   String name = '';
   String sessionId = '';
   String userId = '';
+
   models.DocumentList docs = models.DocumentList(documents: [], total: 0);
 
   deleteEntry(String docId, String fileId) async {
@@ -22,7 +24,7 @@ class AppController extends GetxController {
       DialogHelper.showLoading("deleting file");
       final database = Database(client);
       await database.deleteDocument(
-          collectionId: '627c03022f9033980320', documentId: docId);
+          collectionId: collectionId, documentId: docId);
       Storage storage = Storage(client);
       storage.deleteFile(bucketId: '627bfbd38e7482489029', fileId: fileId);
       uploadedFileInfo();
@@ -53,7 +55,7 @@ class AppController extends GetxController {
       DialogHelper.showLoading("Downloading file");
       Storage storage = Storage(client);
       var out = await storage.getFileDownload(
-        bucketId: '627bfbd38e7482489029',
+        bucketId: bucketId,
         fileId: docId,
       );
       Directory appDocDir = await getApplicationDocumentsDirectory();
@@ -76,7 +78,7 @@ class AppController extends GetxController {
     try {
       final database = Database(client);
       docs = await database.listDocuments(
-          collectionId: '627c03022f9033980320',
+          collectionId: collectionId,
           queries: [Query.equal('user_id', userId)]);
       update();
     } catch (e) {
@@ -99,13 +101,13 @@ class AppController extends GetxController {
         PlatformFile file = result.files.single;
         Storage storage = Storage(client);
         models.File uploadedFile = await storage.createFile(
-          bucketId: '627bfbd38e7482489029',
+          bucketId: bucketId,
           fileId: "unique()",
           file: InputFile(path: file.path, filename: file.name),
         );
         Database database = Database(client);
         await database.createDocument(
-          collectionId: '627c03022f9033980320',
+          collectionId: collectionId,
           documentId: "unique()",
           data: {
             "document_id": uploadedFile.$id,
@@ -145,8 +147,8 @@ class AppController extends GetxController {
     super.onInit();
     client = Client();
     client
-        .setEndpoint("http://10.0.2.2:80/v1") // Your Appwrite Endpoint
-        .setProject("627a86c3aaea05bbcccf") // Your project ID
+        .setEndpoint(endPointUri) // Your Appwrite Endpoint
+        .setProject(projectId) // Your project ID
         .setSelfSigned(status: true);
   }
 
