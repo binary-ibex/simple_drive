@@ -1,16 +1,22 @@
 # simple_drive
 
-A new Flutter project.
+A new Flutter project using appwrite as the backend. 
 
-## Getting Started
+<a href="https://appwrite.io/" target="_blank" style="position: fixed;right: 18px;bottom: 18px;z-index: 999;">
+  <img style="width: 160px;" src="https://appwrite.io/images-ee/press/badge-pink-button.svg" alt="Built with Appwrite">
+</a>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+# Description
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+This is the simple flutter app where users can upload there document on cloud. App has the login and signup feature. 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#App Images
+
+<img src='https://user-images.githubusercontent.com/70746835/168124308-675247bd-f965-496f-800a-ddf7f1f7a72d.png' alt='login' width="200">
+
+<img src='https://user-images.githubusercontent.com/70746835/168124324-10a62e4a-7049-4eee-93ee-5247347fa9ee.png' alt='register' width="200">
+
+<img src='https://user-images.githubusercontent.com/70746835/168125227-ff55041d-4b4e-4591-874c-4fa664c95a73.png' alt='homepage' width="200">
+
+
